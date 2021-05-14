@@ -1,0 +1,125 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace KR4_2
+{
+    struct Person //Розробляємо структуру особи
+    {
+        public string Name { get; set; } 
+        public string SecondName { get; set; }
+        public string SurName { get; set; }
+        public int Age { get; set; }
+    }
+
+    struct Doctor //Структура професійної особи
+    {
+        public Person Person { get; set; }
+        public string Position { get; set; }
+        public int WorkExperienceYears { get; set; }
+    }
+
+    struct Hospital //Структура лікарні
+    {
+        public List<Doctor> Doctors { get; set; } //Створюємо масив 
+
+        public void GetDoctorByWorkExperiance(int expYears)
+        {
+
+            foreach (var doctor in Doctors)
+            {
+                if (doctor.WorkExperienceYears >= expYears) //Виводимо на єкран дані
+                {
+                    Console.WriteLine($"Name: {doctor.Person.Name}\nSecond Name: {doctor.Person.SecondName} " + 
+                                      $"\nSurName: {doctor.Person.SurName}\nAge: {doctor.Person.Age}\nPosition: {doctor.Position}" +
+                                      $"\nWork experience: {doctor.WorkExperienceYears}\n");
+                }
+            }
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Hospital hospital = new Hospital() //ініціалізуємо структури
+            {
+                Doctors = new List<Doctor>()
+                {
+                    new Doctor()
+                    {
+                        Position="Obstetrician-gynecologist",
+                        WorkExperienceYears=10,
+                        Person = new  Person()
+                        {
+                            Name = "Axex",
+                            SurName ="Clar",
+                            SecondName = "Ivanovich",
+                            Age = 38
+                        }
+                    },
+
+                    new Doctor()
+                    {
+                        Position="Virologist",
+                        WorkExperienceYears=9,
+                        Person = new  Person()
+                        {
+                            Name = "Skay",
+                            SurName ="Green",
+                            SecondName = "Danilovna",
+                            Age = 37
+                        }
+                    },
+
+                    new Doctor()
+                    {
+                        Position="CEO",
+                        WorkExperienceYears=100,
+                        Person = new  Person()
+                        {
+                            Name = "Yasha",
+                            SurName ="Lava",
+                            SecondName = "Sergeevna",
+                            Age = 45
+                        }
+                    },
+
+                    new Doctor()
+                    {
+                        Position="Psychiatrist",
+                        WorkExperienceYears=1,
+                        Person = new Person()
+                        {
+                            Name = "Elsa",
+                            SurName = "Lim",
+                            SecondName = "Egorovna",
+                            Age = 29
+                        }
+                    },
+
+                    new Doctor()
+                    {
+                        Position="Surgeon",
+                        WorkExperienceYears=2,
+                        Person = new Person()
+                        {
+                            Name = "Sakura",
+                            SurName = "Haruno",
+                            SecondName = "Kizashi",
+                            Age = 30
+                        }
+
+                    },
+
+                }
+            }; 
+            
+            hospital.GetDoctorByWorkExperiance(10); //Задаємо число стажу
+            Console.ReadLine();
+        }
+    }
+
+}
